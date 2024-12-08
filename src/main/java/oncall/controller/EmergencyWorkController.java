@@ -12,7 +12,6 @@ import oncall.view.InputView;
 import oncall.view.OutputView;
 
 public class EmergencyWorkController {
-
     private final InputView inputView;
     private final OutputView outputView;
     private final StartDayParser startDayParser;
@@ -29,10 +28,9 @@ public class EmergencyWorkController {
         LocalDate startDate = getEmergencyWorkStartDate();
         WeekdaysWorkers weekdaysWorkers = getWeekdaysWorkers();
         HolidayWorkers holidayWorkers = getHolidayWorkers(weekdaysWorkers);
+        closeConsole();
 
         Schedule schedule = createEmergencyWorkSchedule(weekdaysWorkers, holidayWorkers, startDate);
-
-        closeConsole();
         showSchedule(schedule);
     }
 
