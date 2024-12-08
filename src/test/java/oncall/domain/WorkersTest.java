@@ -1,9 +1,11 @@
 package oncall.domain;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import oncall.constants.ExceptionMessage;
 import oncall.domain.parser.WorkersParser;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
@@ -14,5 +16,18 @@ public class WorkersTest {
         assertThatThrownBy(() -> new WeekdaysWorkers(new WorkersParser().parse(names)))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage(ExceptionMessage.INVALID_INPUT.getMessage());
+    }
+
+    @Test
+    void 근무자_순번에_같은_근무자가_중복될_수_없다() {
+        assertThatThrownBy(() -> new WeekdaysWorkers(new WorkersParser().parse("승준,승준,수빈,지한,포비")))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage(ExceptionMessage.INVALID_INPUT.getMessage());
+    }
+
+    @Test
+    void 근무자_수_반환() {
+        assertThat(new WeekdaysWorkers(new WorkersParser().parse("승준,라일,수빈,지한,포비")).hasSize()).isEqualTo(5);
+
     }
 }

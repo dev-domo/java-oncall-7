@@ -1,2 +1,4 @@
-package oncall.view;public class Schedule {
+package oncall.domain;
+
+public class Schedule {
 }
