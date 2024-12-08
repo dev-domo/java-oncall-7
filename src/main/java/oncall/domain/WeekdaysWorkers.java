@@ -1,6 +1,10 @@
-package oncall.controller;
+package oncall.domain;
 
-public class WeekdaysWorkers implements Workers {
-    public WeekdaysWorkers(Object parse) {
+import java.util.List;
+
+public class WeekdaysWorkers extends Workers {
+
+    public WeekdaysWorkers(final List<Worker> workers) {
+        super(workers);
     }
 }

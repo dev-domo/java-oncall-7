@@ -1,6 +1,9 @@
-package oncall.controller;
+package oncall.domain;
 
-public class HolidayWorkers implements Workers {
-    public HolidayWorkers(Object parse) {
+import java.util.List;
+
+public class HolidayWorkers extends Workers {
+    public HolidayWorkers(final List<Worker> workers) {
+        super(workers);
     }
 }
