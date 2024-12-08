@@ -28,7 +28,9 @@ public abstract class Workers {
         }
     }
 
-    public int hasSize() {
-        return workers.size();
+    public void validate(List<Worker> holidayWorkers) {
+        if (this.workers.size() != holidayWorkers.size()) {
+            throw new IllegalArgumentException(ExceptionMessage.INVALID_INPUT.getMessage());
+        }
     }
 }

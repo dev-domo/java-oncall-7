@@ -28,12 +28,18 @@ public class EmergencyWorkController {
     public void start() {
         LocalDate startDate = getEmergencyWorkStartDate();
         Workers weekdaysWorkers = getWeekdaysWorkers();
-        Workers holidayWorkers = getHolidayWorkers();
+        Workers holidayWorkers = getHolidayWorkers(weekdaysWorkers);
 
-        Schedule schedule = createEmergencyWorkSchedule(startDate, weekdaysWorkers, holidayWorkers);
+        Schedule schedule = createEmergencyWorkSchedule(weekdaysWorkers, holidayWorkers, startDate);
 
         closeConsole();
         showSchedule(schedule);
+    }
+
+    private Schedule createEmergencyWorkSchedule(Workers weekdaysWorkers, Workers holidayWorkers, LocalDate startDate) {
+        EmergencyScheduleGenerator emergencyScheduleGenerator = new EmergencyScheduleGenerator(weekdaysWorkers,
+                holidayWorkers);
+        return emergencyScheduleGenerator.generate(startDate);
     }
 
     private LocalDate getEmergencyWorkStartDate() {
@@ -60,22 +66,17 @@ public class EmergencyWorkController {
         }
     }
 
-    private Workers getHolidayWorkers() {
+    private Workers getHolidayWorkers(Workers weekdaysWorkers) {
         while (true) {
             try {
                 outputView.promptForInputHolidayWorkers();
                 String holidayWorkerNames = inputView.answer();
+                weekdaysWorkers.validate(workersParser.parse(holidayWorkerNames));
                 return new HolidayWorkers(workersParser.parse(holidayWorkerNames));
             } catch (IllegalArgumentException exception) {
                 System.out.println(exception.getMessage());
             }
         }
-    }
-
-    private Schedule createEmergencyWorkSchedule(LocalDate startDate, Workers weekdaysWorkers, Workers holidayWorkers) {
-        EmergencyScheduleGenerator emergencyScheduleGenerator = new EmergencyScheduleGenerator(weekdaysWorkers,
-                holidayWorkers);
-        return emergencyScheduleGenerator.generate(startDate);
     }
 
     private void showSchedule(Schedule schedule) {

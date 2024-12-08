@@ -13,7 +13,7 @@ public class OutputView {
     }
 
     public void promptForInputHolidayWorkers() {
-        System.out.println(OutputMessage.INPUT_WORKERS_BY_HOLIDAY_TURN.getMessage());
+        System.out.print(OutputMessage.INPUT_WORKERS_BY_HOLIDAY_TURN.getMessage());
     }
 
     public void showEmergencyWorkSchedule(Schedule schedule) {
