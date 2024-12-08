@@ -11,6 +11,9 @@ import java.util.List;
 import java.util.Locale;
 
 public class Schedule {
+    private static final int FEBRUARY = 2;
+    private static final int LEAP_MONTH_LAST_DAY = 29;
+
     private static final String SPACE = " ";
     private static final String LINE_SEPARATOR = "\n";
 
@@ -34,10 +37,17 @@ public class Schedule {
 
     private void addDateInformation(List<String> dateInformation) {
         for (LocalDate date : workDates) {
+            if (isLeap(date)) {
+                continue;
+            }
             dateInformation.add(date.getMonthValue() + MONTH.getMessage() + date.getDayOfMonth() + DAY.getMessage()
                     + date.getDayOfWeek()
                     .getDisplayName(TextStyle.NARROW, Locale.KOREAN) + checkDayOff(date));
         }
+    }
+
+    private boolean isLeap(LocalDate date) {
+        return date.getMonthValue() == FEBRUARY && date.getDayOfMonth() == LEAP_MONTH_LAST_DAY;
     }
 
     private void addScheduleTable(List<String> table, List<String> dateInformation) {
