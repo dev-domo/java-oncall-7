@@ -20,7 +20,7 @@ public class Schedule {
         List<String> table = new ArrayList<>();
         List<String> dateInformation = new ArrayList<>();
         for (LocalDate date : workDates) {
-            dateInformation.add(date.getMonthValue() + "월 " + date.getDayOfWeek() + "일 " + date.getDayOfWeek()
+            dateInformation.add(date.getMonthValue() + "월 " + date.getDayOfMonth() + "일 " + date.getDayOfWeek()
                     .getDisplayName(TextStyle.NARROW, Locale.KOREAN) + checkDayOff(date));
         }
 

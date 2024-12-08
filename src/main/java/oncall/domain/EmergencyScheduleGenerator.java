@@ -58,7 +58,8 @@ public class EmergencyScheduleGenerator {
     }
 
     private boolean isLastDayOfMonth(LocalDate startDate, LocalDate currentDate) {
-        return currentDate.isBefore(YearMonth.from(startDate).atEndOfMonth());
+        LocalDate lastDate = YearMonth.from(startDate).atEndOfMonth();
+        return currentDate.isBefore(lastDate) || currentDate.equals(lastDate);
     }
 
     private LocalDate calculateCurrentDate(LocalDate startDate, int day) {
