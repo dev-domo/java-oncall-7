@@ -4,8 +4,10 @@ import camp.nextstep.edu.missionutils.Console;
 
 public class InputView {
     public String answer() {
-        String input = Console.readLine();
+        return Console.readLine();
+    }
+
+    public void closeAnswer() {
         Console.close();
-        return input;
     }
 }
