@@ -17,6 +17,7 @@ public class OutputView {
     }
 
     public void showEmergencyWorkSchedule(Schedule schedule) {
+        System.out.println();
         System.out.println(schedule.toString());
     }
 }
