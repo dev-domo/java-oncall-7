@@ -30,6 +30,17 @@ public abstract class Workers {
     }
 
     public void validate(List<Worker> holidayWorkers) {
+        checkWorkersSize(holidayWorkers);
+        checkSameTurn(holidayWorkers);
+    }
+
+    private void checkSameTurn(List<Worker> holidayWorkers) {
+        if (workers.equals(holidayWorkers)) {
+            throw new IllegalArgumentException(ExceptionMessage.INVALID_INPUT.getMessage());
+        }
+    }
+
+    private void checkWorkersSize(List<Worker> holidayWorkers) {
         if (this.workers.size() != holidayWorkers.size()) {
             throw new IllegalArgumentException(ExceptionMessage.INVALID_INPUT.getMessage());
         }
