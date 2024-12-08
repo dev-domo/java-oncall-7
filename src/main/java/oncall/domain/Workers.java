@@ -8,7 +8,7 @@ public abstract class Workers {
     private static final int MINIMUM_WORKERS_SIZE = 5;
     private static final int MAXIMUM_WORKERS_SIZE = 35;
 
-    private final List<Worker> workers;
+    protected final List<Worker> workers;
 
     public Workers(List<Worker> workers) {
         checkNumberOfWorkers(workers);
@@ -32,5 +32,14 @@ public abstract class Workers {
         if (this.workers.size() != holidayWorkers.size()) {
             throw new IllegalArgumentException(ExceptionMessage.INVALID_INPUT.getMessage());
         }
+    }
+
+    public Worker findNextWorker(int index, Worker beforeWorker) {
+        Worker nextWorker = workers.get(index);
+        if (nextWorker.equals(beforeWorker)) {
+            List<Worker> originalWorkers = workers;
+            originalWorkers.set(index, originalWorkers.set(index + 1, originalWorkers.get(index)));
+        }
+        return workers.get(index);
     }
 }

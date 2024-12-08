@@ -27,8 +27,8 @@ public class EmergencyWorkController {
 
     public void start() {
         LocalDate startDate = getEmergencyWorkStartDate();
-        Workers weekdaysWorkers = getWeekdaysWorkers();
-        Workers holidayWorkers = getHolidayWorkers(weekdaysWorkers);
+        WeekdaysWorkers weekdaysWorkers = getWeekdaysWorkers();
+        HolidayWorkers holidayWorkers = getHolidayWorkers(weekdaysWorkers);
 
         Schedule schedule = createEmergencyWorkSchedule(weekdaysWorkers, holidayWorkers, startDate);
 
@@ -36,7 +36,8 @@ public class EmergencyWorkController {
         showSchedule(schedule);
     }
 
-    private Schedule createEmergencyWorkSchedule(Workers weekdaysWorkers, Workers holidayWorkers, LocalDate startDate) {
+    private Schedule createEmergencyWorkSchedule(WeekdaysWorkers weekdaysWorkers, HolidayWorkers holidayWorkers,
+                                                 LocalDate startDate) {
         EmergencyScheduleGenerator emergencyScheduleGenerator = new EmergencyScheduleGenerator(weekdaysWorkers,
                 holidayWorkers);
         return emergencyScheduleGenerator.generate(startDate);
@@ -54,7 +55,7 @@ public class EmergencyWorkController {
         }
     }
 
-    private Workers getWeekdaysWorkers() {
+    private WeekdaysWorkers getWeekdaysWorkers() {
         while (true) {
             try {
                 outputView.promptForInputWeekdaysWorkers();
@@ -66,7 +67,7 @@ public class EmergencyWorkController {
         }
     }
 
-    private Workers getHolidayWorkers(Workers weekdaysWorkers) {
+    private HolidayWorkers getHolidayWorkers(Workers weekdaysWorkers) {
         while (true) {
             try {
                 outputView.promptForInputHolidayWorkers();
@@ -79,11 +80,11 @@ public class EmergencyWorkController {
         }
     }
 
-    private void showSchedule(Schedule schedule) {
-        outputView.showEmergencyWorkSchedule(schedule);
-    }
-
     private void closeConsole() {
         inputView.closeAnswer();
+    }
+
+    private void showSchedule(Schedule schedule) {
+        outputView.showEmergencyWorkSchedule(schedule);
     }
 }
