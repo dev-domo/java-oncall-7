@@ -1,2 +1,5 @@
-package oncall.domain.parser;public interface Parser {
+package oncall.domain.parser;
+
+public interface Parser {
+    Object parse(String input);
 }
