@@ -3,7 +3,7 @@ package oncall.util;
 import oncall.constants.ExceptionMessage;
 
 public class StringUtil {
-    private static final String MONTH_AND_DAY_INPUT_REGEX = "([가-힣]+)(,[0-9]+)*";
+    private static final String MONTH_AND_DAY_INPUT_REGEX = "([0-9]+)(,[가-힣]+)*";
     private static final String WORKERS_INPUT_REGEX = "([가-힣]+)(,[가-힣]+)*";
     private static final String SEPARATOR = ",";
 

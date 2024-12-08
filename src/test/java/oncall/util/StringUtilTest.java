@@ -11,7 +11,7 @@ import org.junit.jupiter.params.provider.ValueSource;
 public class StringUtilTest {
     @Test
     void 월_시작요일_입력을_쉼표_기준으로_분할() {
-        assertThat(StringUtil.toArray("월,5")).containsExactly("월", "5");
+        assertThat(StringUtil.toArray("5,월")).containsExactly("5", "월");
     }
 
     @Test
